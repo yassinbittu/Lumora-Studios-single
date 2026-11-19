@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>LUMORA STUDIOS | Wedding & Family Photographers in Hyderabad</title>
-<meta name="description" content="Lumora Studios – premium wedding, newborn, toddler and event photographers in Hyderabad, Telangana.">
-<meta property="og:title" content="LUMORA STUDIOS – Every Frame Tells a Story">
+<title>VINOD PHOTOGRAPHY! | Wedding & Family Photographers in Hyderabad</title>
+<meta name="description" content="VINOD PHOTOGRAPHY! – premium wedding, newborn, toddler and event photographers in Hyderabad, Telangana.">
+<meta property="og:title" content="VINOD PHOTOGRAPHY! – Every Frame Tells a Story">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -75,14 +75,86 @@ nav a.l:after{content:"";position:absolute;left:0;bottom:-5px;height:1px;width:0
 .stats b{font-family:var(--serif);font-size:2.6rem;font-weight:500;display:block;line-height:1;color:var(--terra)}.stats span{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase}
 .rl{font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid;padding-bottom:4px;font-weight:500}
 /* wall */
-#wall{overflow:hidden;padding-bottom:130px}
-#wallTrack{display:flex;gap:20px;overflow-x:auto;padding:70px 45vw 40px;scrollbar-width:none;cursor:grab;perspective:1400px;align-items:center;height:620px}
-#wallTrack::-webkit-scrollbar{display:none}#wallTrack.drag{cursor:grabbing}
-.wc{flex:0 0 auto;width:260px;aspect-ratio:2/3;position:relative;transition:filter .3s;user-select:none}
-.wc img{pointer-events:none;-webkit-user-drag:none}
-.wc span{position:absolute;left:14px;bottom:14px;color:#fff;font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;text-shadow:0 1px 8px #000}
-.wc:hover{filter:brightness(1.15)}
-.hint{text-align:center;font-size:.7rem;letter-spacing:.3em;color:#8a7f72;margin-top:10px}
+
+/* ===== THE WALL – CINEMATIC IN-TO-OUT MOTION ===== */
+
+#wall {
+  overflow: hidden;
+  padding-bottom: 130px;
+}
+
+#wallTrack {
+  display: flex;
+  gap: 25px;
+  overflow-x: auto;
+  padding: 70px 45vw 40px;
+  scrollbar-width: none;
+  cursor: grab;
+  perspective: 1400px;
+  align-items: center;
+  height: 620px;
+  transform-style: preserve-3d;
+  scroll-behavior: auto;
+}
+
+#wallTrack::-webkit-scrollbar {
+  display: none;
+}
+
+#wallTrack.drag {
+  cursor: grabbing;
+}
+
+.wc {
+  flex: 0 0 auto;
+  width: 260px;
+  aspect-ratio: 2 / 3;
+  position: relative;
+  transform-style: preserve-3d;
+  transition:
+    transform 0.12s linear,
+    opacity 0.2s ease;
+  user-select: none;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+.wc img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+
+.wc span {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  color: white;
+  font-size: .65rem;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 8px #000;
+  pointer-events: none;
+}
+
+.wc:hover {
+  filter: brightness(1.15);
+}
+
+@media(max-width:640px) {
+  .wc {
+    width: 200px;
+  }
+
+  #wallTrack {
+    height: 500px;
+    padding-left: 30vw;
+    padding-right: 30vw;
+  }
+}
+
 /* carousel */
 #cv{position:relative;height:clamp(380px,52vw,560px);perspective:1600px;touch-action:pan-y;cursor:grab;margin-top:50px}
 .cs{position:absolute;left:50%;top:0;width:clamp(200px,26vw,340px);aspect-ratio:3/4;margin-left:calc(clamp(200px,26vw,340px)/-2);transition:transform .7s cubic-bezier(.2,.7,.2,1),opacity .7s,filter .7s;user-select:none}
@@ -252,7 +324,7 @@ footer .logo{text-align:left;color:var(--cream);margin-bottom:10px}
 <script>
 /* ===== 1. CONFIG – edit studio details here ===== */
 const CONFIG = {
-  studioName: "LUMORA STUDIOS",           // also used as the text logo
+  studioName: "VINOD PHOTOGRAPHY!",           // also used as the text logo
   tagline: "Every Frame Tells a Story.",
   phone: "+91 98765 43210",
   whatsapp: "919876543210",                // country code + number, no + or spaces
@@ -344,18 +416,169 @@ const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.ta
 const watch=()=>$$(".reveal:not(.in)").forEach(el=>io.observe(el)); watch();
 $$("#stats b").forEach(b=>{ const n=+b.dataset.n, suf=b.textContent.replace(/\d/g,""); new IntersectionObserver((es,o)=>{ if(es[0].isIntersecting){ o.disconnect(); let s=null; const st=t=>{ s??=t; const p=Math.min((t-s)/1400,1); b.textContent=Math.round(n*p)+suf; if(p<1)requestAnimationFrame(st);}; requestAnimationFrame(st);} }).observe(b); });
 
-// THE WALL – drag + perspective
-const wt=$("#wallTrack");
-wt.innerHTML = GALLERY.slice(0,14).map(g=>`<div class="wc ph" data-cat="${g[1]}">${pic(g[0],g[2])}<span>${g[1]}</span></div>`).join("");
-const wcs=$$(".wc"); let dragging=false,sx=0,sl=0,moved=0;
-const wallFx=()=>{ const c=wt.scrollLeft+wt.clientWidth/2; wcs.forEach(el=>{ const mid=el.offsetLeft+el.offsetWidth/2, d=(mid-c)/(wt.clientWidth*.55), a=Math.min(Math.abs(d),1.4);
-  el.style.transform=`scale(${1.25-a*.5}) rotateY(${-d*28}deg)`; el.style.opacity=1-a*.4; el.style.zIndex=Math.round(10-a*5); }); };
-wt.addEventListener("scroll",()=>requestAnimationFrame(wallFx),{passive:true});
-wt.addEventListener("pointerdown",e=>{ if(e.pointerType==="touch")return; dragging=true; moved=0; sx=e.clientX; sl=wt.scrollLeft; wt.classList.add("drag"); });
-addEventListener("pointermove",e=>{ if(!dragging)return; moved=Math.abs(e.clientX-sx); wt.scrollLeft=sl-(e.clientX-sx); });
-addEventListener("pointerup",()=>{ dragging=false; wt.classList.remove("drag"); });
-wcs.forEach(el=>el.addEventListener("click",()=>{ if(moved>6)return; setFilter(el.dataset.cat); $("#gallery").scrollIntoView({behavior:"smooth"}); }));
-wt.scrollLeft=(wt.scrollWidth-wt.clientWidth)/2-0; wallFx(); addEventListener("resize",wallFx);
+
+// ===== THE WALL – AUTO IN-TO-OUT 3D MOTION =====
+
+const wt = $("#wallTrack");
+
+wt.innerHTML = GALLERY.slice(0, 14).map(g => `
+  <div class="wc ph" data-cat="${g[1]}">
+    ${pic(g[0], g[2])}
+    <span>${g[1]}</span>
+  </div>
+`).join("");
+
+const wcs = $$(".wc");
+
+let wallPosition = 0;
+let wallDragging = false;
+let wallStartX = 0;
+let wallStartPosition = 0;
+let wallMoved = false;
+let wallLastTime = 0;
+
+const wallSpeed = 0.65;
+
+// Set initial position
+const wallCenter = () => {
+  return wt.scrollWidth / 2 - wt.clientWidth / 2;
+};
+
+// 3D perspective for each card
+function wallFx() {
+
+  const center = wt.scrollLeft + wt.clientWidth / 2;
+
+  wcs.forEach((el, index) => {
+
+    const mid = el.offsetLeft + el.offsetWidth / 2;
+    const distance = (mid - center) / (wt.clientWidth * 0.55);
+
+    const amount = Math.min(Math.abs(distance), 1.5);
+
+    const scale = Math.max(0.35, 1.2 - amount * 0.48);
+
+    const rotate = -distance * 25;
+
+    el.style.transform = `
+      translateZ(${-amount * 100}px)
+      scale(${scale})
+      rotateY(${rotate}deg)
+    `;
+
+    el.style.opacity = Math.max(0.15, 1 - amount * 0.55);
+
+    el.style.zIndex = Math.round(20 - amount * 5);
+
+  });
+}
+
+// Continuous automatic movement
+function animateWall(time) {
+
+  if (!wallLastTime) wallLastTime = time;
+
+  const delta = Math.min(time - wallLastTime, 40);
+
+  wallLastTime = time;
+
+  if (!wallDragging) {
+
+    wt.scrollLeft += wallSpeed * (delta / 16.67);
+
+    // Restart seamlessly when reaching the end
+    if (wt.scrollLeft >= wt.scrollWidth - wt.clientWidth - 2) {
+      wt.scrollLeft = 0;
+    }
+
+  }
+
+  wallFx();
+
+  requestAnimationFrame(animateWall);
+}
+
+// Mouse and touch dragging
+wt.addEventListener("pointerdown", e => {
+
+  wallDragging = true;
+  wallMoved = false;
+
+  wallStartX = e.clientX;
+  wallStartPosition = wt.scrollLeft;
+
+  wt.classList.add("drag");
+
+  wt.setPointerCapture(e.pointerId);
+
+});
+
+wt.addEventListener("pointermove", e => {
+
+  if (!wallDragging) return;
+
+  const difference = e.clientX - wallStartX;
+
+  if (Math.abs(difference) > 6) {
+    wallMoved = true;
+  }
+
+  wt.scrollLeft = wallStartPosition - difference;
+
+});
+
+function stopWallDrag() {
+
+  if (!wallDragging) return;
+
+  wallDragging = false;
+
+  wt.classList.remove("drag");
+
+  // Prevent click after dragging
+  if (wallMoved) {
+    setTimeout(() => {
+      wallMoved = false;
+    }, 100);
+  }
+
+}
+
+wt.addEventListener("pointerup", stopWallDrag);
+wt.addEventListener("pointercancel", stopWallDrag);
+
+// Click a card to open its gallery category
+wcs.forEach(el => {
+
+  el.addEventListener("click", () => {
+
+    if (wallMoved) return;
+
+    setFilter(el.dataset.cat);
+
+    $("#gallery").scrollIntoView({
+      behavior: "smooth"
+    });
+
+  });
+
+});
+
+// Start from center
+function initWall() {
+
+  wt.scrollLeft = wallCenter();
+
+  wallFx();
+
+}
+
+initWall();
+
+addEventListener("resize", initWall);
+
+// Start continuous animation
+requestAnimationFrame(animateWall);
 
 // SERVICES – 3D carousel
 const cv=$("#cv"); let cur=0;
